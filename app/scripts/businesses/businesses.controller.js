@@ -11,27 +11,18 @@
   function BusinessesController($state, businessesService, $ionicSlideBoxDelegate) {
     var vm = angular.extend(this, {
       categories: [],
-      products: [],
+      businesses: [],
       showProducts: showProducts,
       showProductDetails: showProductDetails,
       storeName: ''
     });
 
     (function activate() {
-      loadProducts();
       loadCategories();
-      loadBusinessInfo();
+      loadBusinesses();
     })();
 
     // ******************************************************
-
-    function loadProducts() {
-      businessesService.getFeaturedProducts()
-				.then(function (products) {
-				  vm.products = products;
-				  $ionicSlideBoxDelegate.update();
-				});
-    }
 
     function loadCategories() {
       businessesService.getFeaturedCategories()
@@ -59,5 +50,13 @@
         categoryName: category.title
       });
     }
+
+    function loadBusinesses() {
+      businessesService.getBusinesses()
+      .then(function (businesses) {
+        vm.businesses = [businesses.pop()];
+      });
+    }
+
   }
 })();

@@ -5,14 +5,14 @@
 		.module('restaurant.businesses')
 		.factory('businessesService', businessesService);
 
-  businessesService.$inject = ['dataService'];
+  businessesService.$inject = ['_', 'dataService', 'mapService'];
 
   /* @ngInject */
-  function businessesService(dataService) {
+  function businessesService(_, dataService, mapService) {
     var service = {
       getFeaturedCategories: getFeaturedCategories,
       getFeaturedProducts: getFeaturedProducts,
-      getBusiness: dataService.getBusiness
+      getBusinesses: getBusinesses
     };
     return service;
 
@@ -24,6 +24,13 @@
 
     function getFeaturedProducts() {
       return dataService.getFeaturedProducts();
+    }
+
+    function getBusinesses() {
+      return dataService.getBusinesses()
+        .then(function (businessInfo) {
+          return _.map(businessInfo, mapService.getMarkers);
+        });
     }
   }
 

@@ -21,7 +21,8 @@
 			getFeaturedProduct: getFeaturedProduct,
 			getBusiness: getBusiness,
 			getArticles: getArticles,
-			getArticle: getArticle
+			getArticle: getArticle,
+      getBusinesses: getBusinesses
 		};
 		return service;
 
@@ -69,6 +70,11 @@
 		function getBusiness() {
 			var query = db.child('business');
 			return $firebaseObject(query).$loaded().then(initItem);
+		}
+
+		function getBusinesses() {
+		  var query = db.child('businesses');
+		  return $firebaseArray(query).$loaded().then(initArray);
 		}
 
 		function initItem(item) {
