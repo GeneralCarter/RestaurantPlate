@@ -27,6 +27,7 @@ angular.module('restaurant', [
 	'restaurant.wordpress',
 	'restaurant.drupal',
 	'restaurant.favorites',
+  'restaurant.businesses',
 	'gMaps'
 ])
 
